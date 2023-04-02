@@ -29,32 +29,32 @@ let isJumping = false;
     if (isJumping) return; 
     isJumping = true;
     
-    let position = 0;
+    let position = 300;
     let timerId = setInterval(function() {
       //move up 
       console.log('up');
       position += 30;
       walkingBall.style.bottom = position + 'px';
 
-      if (position >= 300) {
+      if (position >= 500) {
         clearInterval(timerId);
         fall();
       }
     }, 20);
-  }  
+  }     
 
   function fall() {
-    let position = 300;
+    let position = 500;
     let timerId = setInterval(function() {
       //move down 
       console.log('down');
       position -= 30;
       walkingBall.style.bottom = position + 'px';
 
-      if (position <= 0) {
+      if (position <= 300) {
         clearInterval(timerId);
         isJumping = false; //reset isJumping to false
-      }
+      } 
     }, 20);
   }
 });
