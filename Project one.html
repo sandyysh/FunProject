@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jumpy Ball</title>
+    <link rel="stylesheet" href="Project one.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="Project one.js"></script>
+  </head>
+  <body>
+    <div class="world">
+      <div class="background">
+        <a href='https://svgshare.com/s/reT'><img src='https://svgshare.com/i/reT.svg' title='Background SVG (GA)'/></a>
+        <!-- To do: Save the images svg in github and host it locally -->
+      </div>
+      <div class="walkingBall">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_ISCngv3FyB.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+      </div>
+      <button>Press Space to jump</button>
+    </div>
+  </body>
+  <script> 
+    $(() => {
+      const svg = document.querySelector('.background img');
+      svg.addEventListener('click', function(event) {
+        event.preventDefault();
+      });
+    });
+  </script>
+</html>
