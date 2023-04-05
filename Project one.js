@@ -86,7 +86,11 @@ const walkingBall = document.querySelector('.walkingBall');
         clearInterval(timerID);
         obstacle.remove();
       }      
-
+      if (detectCollision(walkingBall, obstacle)) {
+        clearInterval(timerID);
+        clearInterval(obstacleIntervalID);
+        alert("Game over");
+      }
     }, 20)
     
     }
@@ -102,6 +106,19 @@ const walkingBall = document.querySelector('.walkingBall');
   obstacleIntervalID = setInterval(generateObstacles, 4000); 
   //start obstacle generation every 4 secs 
   //random time not working yet - to do next time
+
+function detectCollision(walkingBall, obstacle) {
+  const walkingBallBounding = walkingBall.getBoundingClientRect();
+  const obstacleRect = obstacle.getBoundingClientRect();
+  return (
+    walkingBallBounding.left < obstacleRect.right &&
+    walkingBallBounding.right > obstacleRect.left &&
+    walkingBallBounding.top < obstacleRect.bottom &&
+    walkingBallBounding.bottom > obstacleRect.top
+  ); 
+}
+
+});
 
 
 
@@ -128,4 +145,3 @@ const walkingBall = document.querySelector('.walkingBall');
 // }
 // //check for collision every 20 miliseconds
 //   )}})
-  })
