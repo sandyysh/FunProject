@@ -41,7 +41,6 @@ z-index: 0;
   POSITION: absolute; 
   width: 60px; 
   height: 60px;
-  background-color: oRANGE; 
-  bottom: 600px;
-  z-index: 1; 
+  background-color: orange; 
+  bottom: 600px; 
  }

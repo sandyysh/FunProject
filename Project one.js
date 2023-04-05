@@ -7,7 +7,8 @@
 
 $(() => {
 //Select the walkingBall, button and grid element
-  const walkingBall = document.querySelector('.walkingBall'); 
+//Query selector lets u choose the first html element
+const walkingBall = document.querySelector('.walkingBall'); 
   const jumpButton = document.querySelector('button');
   const grid = document.querySelector('.grid')
 
@@ -65,9 +66,9 @@ $(() => {
       } 
     }, 20);
   }
-  
-//  function generateObstacles() creates new  obstacles and append it to the grid element in the html 
-//the position is 1000 pixels from the left of the grid. 
+  //array random image
+  //  function generateObstacles() creates new  obstacles and append it to the grid element in the html 
+//the position is 100 pixels from the left of the grid. 
   function generateObstacles(){
     let obstaclePosition = 1400; // set initial obstacle position
     let randomTime = Math.random() * 4000; 
@@ -97,41 +98,34 @@ $(() => {
 
    
 
-  //This sets an interval of 2 seconds for generating a new obstacles
+  //This sets an interval of 4 seconds for generating a new obstacles
   obstacleIntervalID = setInterval(generateObstacles, 4000); 
-  //start obstacle generation every 2 secs 
+  //start obstacle generation every 4 secs 
   //random time not working yet - to do next time
 
-//selects all obstacles in the html by using querySelectorAll() method and loops over them using the 'forEach()' method. 
-    const obstacles = document.querySelectorAll('.obstacle');
-    obstacles.forEach(function(obstacle) {
-      obstacle.style.right += obstacle.style.right + 'px';
-      if (obstacle.getBoundingClientRect().left < walkingBall.getBoundingClientRect().right) {
-        clearInterval(timerID);
-      }
-
-    //Check for collision 
-    // const obstacleRect = obstacle.getBoundingClientRect();
-    // const ballRect = walkingBall.getBoundingClientRect();
-    // if (
-    //   obstacleRect.left < ballRect.right &&
-    //   obstacleRect.right > ballRect.left &&
-    //   obstacleRect.top < ballRect.bottom &&
-    //   obstacleRect.bottom > ballRect.top
-    // ) {
-    //   clearInterval(timerID);
-    //   clearInterval(obstacleIntervalID);
-    //   alert('Game Over');
-    // 
-
-  //   if (obstaclePosition <= 0) {
-  //     clearInterval(timerID);
-  //     obstacle.remove();
-  //   }
-  // }, 20);
-
-  //window.height to make sure walking ball is in correct position 
 
 
-}); 
-});
+    //Check for collision of walking ball with obstacle
+//   function checkForCollision(){
+//     // Get all obstacles in HTML using jquery selector 
+//     const obstacles = $('.obstacle');
+
+//   //Loop over each obstacle 
+//   obstacles.each(function(){
+//     //Move the obstacle to the left 
+//     const obstacle = $(this);
+//     obstacle.css('right', '+=10px');
+
+//     //check if obstacle and walking ball overlap
+//     const obstacleRect = obstacle.get(0).getBoundingClientRect();
+//     const ballRect = walkingBall.get(0).getBoundingClientRect();
+//     if (obstacleRect.top <= ballRect.bottom &&
+//       obstacleRect.right >= ballRect.left &&
+//       obstacleRect.left <= ballRect.right) {
+//     alert('game');
+//   setInterval(checkForCollision, 20);
+//   }
+// }
+// //check for collision every 20 miliseconds
+//   )}})
+  })
