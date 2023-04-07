@@ -39,24 +39,26 @@ const walkingBall = document.querySelector('.walkingBall');
       //move the ball upwards by changing its bottom position
       //this looks like jump but i didnt add jump anywhere?
       console.log('up');
-      position += 30;
+      position += 50;
       walkingBall.style.bottom = position + 'px';
 
 // If the ball reaches a certain height, stop it from moving upwards
-      if (position >= 600) {
+      if (position >= 900) {
         clearInterval(timerId);
         fall();
       }
-    }, 20);
+      //generate obstacles while jumping 
+      generateObstacles();
+    }, 30);
   }     
 
   //This function moves the ball downwards when its falling
   function fall() {
-    let position = 600;
+    let position = 1000;
     let timerId = setInterval(function() {
       //move the ball downwards by changing its bottom position 
       console.log('down');
-      position -= 30;
+      position -= 50;
       walkingBall.style.bottom = position + 'px';
 
     // If the ball reaches the ground, stop moving it and reset isJumping variable
@@ -80,7 +82,7 @@ const walkingBall = document.querySelector('.walkingBall');
     obstacle.style.left = obstaclePosition + 'px';
     //this moves to left by -10 per 2 secs making it seem like a motion 
     let timerID = setInterval(function() {
-      obstaclePosition -= 10;
+      obstaclePosition -= 20;
       obstacle.style.left = obstaclePosition + 'px'
       if (obstaclePosition <= 0) { //remove obstacle
         clearInterval(timerID);
@@ -89,59 +91,39 @@ const walkingBall = document.querySelector('.walkingBall');
       if (detectCollision(walkingBall, obstacle)) {
         clearInterval(timerID);
         clearInterval(obstacleIntervalID);
-        alert("Game over");
-      }
+        $("button").text("Game over").css({opacity: 0.5});
+        setTimeout(function() {
+          $("button").text("Press any key to restart").css({opacity: 1}) 
+          }, 5000); //add delay of 5 second before changing button
+        document.addEventListener("keypress", function(){
+          setTimeout(function(){
+          reloadGame();
     }, 20)
-    
-    }
+  });
+}
 
-  //call on function 
-//generateObstacles();
 //the setInterval method repeatedly calls a function, function() with a delay of 20 miliseconds between each call 
 //It moves the obstacle left by 10 pixel each time it ias called, giving the impression of motion. When the obstacle reaches the left edge of the grid, the interval is cleared and the obstacle is removed from HTML. 
 
-   
+function reloadGame(){
+  location.reload()  //if any key is pressed
+}
 
   //This sets an interval of 4 seconds for generating a new obstacles
   obstacleIntervalID = setInterval(generateObstacles, 4000); 
   //start obstacle generation every 4 secs 
   //random time not working yet - to do next time
 
+  //To reduce the padding around the ball
 function detectCollision(walkingBall, obstacle) {
   const walkingBallBounding = walkingBall.getBoundingClientRect();
   const obstacleRect = obstacle.getBoundingClientRect();
   return (
-    walkingBallBounding.left < obstacleRect.right &&
-    walkingBallBounding.right > obstacleRect.left &&
-    walkingBallBounding.top < obstacleRect.bottom &&
-    walkingBallBounding.bottom > obstacleRect.top
+    walkingBallBounding.left -100 < obstacleRect.right &&
+    walkingBallBounding.right - 100 > obstacleRect.left &&
+    walkingBallBounding.top -50 < obstacleRect.bottom &&
+    walkingBallBounding.bottom -80 > obstacleRect.top
   ); 
-}
+  }
 
-});
-
-
-
-    //Check for collision of walking ball with obstacle
-//   function checkForCollision(){
-//     // Get all obstacles in HTML using jquery selector 
-//     const obstacles = $('.obstacle');
-
-//   //Loop over each obstacle 
-//   obstacles.each(function(){
-//     //Move the obstacle to the left 
-//     const obstacle = $(this);
-//     obstacle.css('right', '+=10px');
-
-//     //check if obstacle and walking ball overlap
-//     const obstacleRect = obstacle.get(0).getBoundingClientRect();
-//     const ballRect = walkingBall.get(0).getBoundingClientRect();
-//     if (obstacleRect.top <= ballRect.bottom &&
-//       obstacleRect.right >= ballRect.left &&
-//       obstacleRect.left <= ballRect.right) {
-//     alert('game');
-//   setInterval(checkForCollision, 20);
-//   }
-// }
-// //check for collision every 20 miliseconds
-//   )}})
+  })}});
