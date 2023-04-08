@@ -2,9 +2,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: ma;
-    height: auto;
+    width:100%;
+    height: 100%;
     z-index: -1;
+    background-image: url("/Users/sandyyeo/Desktop/GA Project 1/Background-GA-straight line.svg");
+    background-size: cover;
+    background-origin: inherit;
   }
 
 button {
@@ -18,8 +21,8 @@ gap: 10px;
 position: absolute;
 width: 272px;
 height: 64px;
-left: 584px;
-top: 881px;
+left: 45%;
+bottom: 20%;
 
 background: #077194;
 box-shadow: 4px 5px 30px 6px rgba(2, 101, 134, 0.157);
@@ -35,6 +38,7 @@ z-index: 0;
     left: 50%;
     bottom: 400px;
     transform: translate(-50%, -50%);
+    border: 1px solid black;
   }
   
  .obstacle {
