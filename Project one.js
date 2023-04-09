@@ -66,11 +66,9 @@ let timerID;
     }, 20);
   }
 
-
-
-
   //  function generateObstacles() creates new  obstacles and append it to the grid element in the html 
-  
+let score = 0;
+
 function detectCollision(walkingBall, obstacle){
   const walkingBallBounding = walkingBall.getBoundingClientRect();
   const obstacleRect = obstacle.getBoundingClientRect();
@@ -81,8 +79,14 @@ function detectCollision(walkingBall, obstacle){
     walkingBallBounding.bottom  > obstacleRect.top
   ); 
 }
+//Function to increment score and display
+function obstacleAvoided() {
+  score++;
+  $("#score").text("Score:" + score);
+}
 
 function generateObstacles() {
+  
   //Array of obstacle images
   const obstacleImages = [
     "Images/Obstacle1.svg",
@@ -92,50 +96,53 @@ function generateObstacles() {
     "Images/Obstacle5.svg",
     "Images/Obstacle6.svg"
   ];
-  let obstaclePosition = $(window).width() -100; // set initial obstacle position
-   // while(obstaclePosition >= -100){
+  // while(obstaclePosition >= -100){
   //using a while loop to generate multiple obstacles when certain conditions are met
-    const obstacle = document.createElement('div');
-    obstacle.classList.add('obstacle');
-    // Generate a random number between 0 and the length of the image array minus one. For example:
-    const randomIndex = Math.floor(Math.random() * obstacleImages.length);  
-    obstacle.style.backgroundImage = `url(${obstacleImages[randomIndex]})`;
-    grid.appendChild(obstacle)
-    obstacle.style.left = obstaclePosition + 'px';
-    obstacle.style.backgroundSize = 'contain';
+  const obstacle = document.createElement('div');
+  // set initial obstacle position
+  let obstaclePosition = $(window).width() -100;
+  obstacle.classList.add('obstacle');
+  
+  // Generate a random number between 0 and the length of the image array minus one. For example:
+  const randomIndex = Math.floor(Math.random() * obstacleImages.length);  
+  obstacle.style.backgroundImage = `url(${obstacleImages[randomIndex]})`;
+  grid.appendChild(obstacle);
+  
+  obstacle.style.left = obstaclePosition + 'px';
+  obstacle.style.backgroundSize = 'contain';
+
+ 
+  //this moves to left by -10 per 2 secs making it seem like a motion 
+  let timerID = setInterval(function() {
+    obstaclePosition -= 20;
+    obstacle.style.left = obstaclePosition + 'px'
     
-    //this moves to left by -10 per 2 secs making it seem like a motion 
-    let timerID = setInterval(function() {
-      obstaclePosition -= 20;
-      obstacle.style.left = obstaclePosition + 'px'
-
-      
-
-      if (obstaclePosition <= 0) { //remove obstacle
+    if (obstaclePosition < -100) { //remove obstacle
+      clearInterval(timerID);
+      obstacleAvoided();
+      obstacle.remove();
+      randomTime = Math.floor(Math.random() * 5000) + 1000;
+      setTimeout(generateObstacles,randomTime);
+    }else{ //if (obstaclePosition > 0 && obstaclePosition <60) {
+      if (detectCollision(walkingBall, obstacle)) {          
         clearInterval(timerID);
-        obstacle.remove();
-        randomTime = Math.floor(Math.random() * 5000) + 1000;
-        setTimeout(generateObstacles,randomTime);
-      }else{
-        if (detectCollision(walkingBall, obstacle)) {          
-          clearInterval(timerID);
-          clearInterval(obstacleIntervalID);
-          $("button").text("Game over").css({opacity: 0.5});
-            setTimeout(function() {
-              $("button").text("Press any key to restart").css({opacity: 1}) 
-              }, 2000); //add delay of 2 second before changing button
-            document.addEventListener("keydown", function(){
-              setTimeout(function(){
-              reloadGame();
-          }, 50);
+        clearInterval(obstacleIntervalID);
+        $("button").text("Game over").css({opacity: 0.5});
+        setTimeout(function() {
+          $("button").text("Press any key to restart").css({opacity: 1}) 
+        }, 2000); //add delay of 2 second before changing button
+              
+        document.addEventListener("keydown", function(){
+          setTimeout(function(){
+            reloadGame();
+          });
         });
-        }
-      }     
+      } /* else if (obstaclePosition < 0 && obstaclePosition > -10 ) {
+            obstacleAvoided();
+            console.log(score)
+          }*/
     }
-    ,20); 
-
-
- // }
+  }, 20);
 }
 
 function startGame(){

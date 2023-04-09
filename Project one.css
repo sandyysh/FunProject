@@ -70,3 +70,8 @@ button {
   /* background-color: orange;  */
   bottom: 150px; 
  }
+
+ #score {
+  font-size: 32px; 
+  position: absolute; 
+ }
