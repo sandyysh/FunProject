@@ -1,5 +1,7 @@
 body {
   overflow: hidden;
+  margin: 0; 
+  height: 100%;
 }
 
 .background {
@@ -9,7 +11,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: url("/Users/sandyyeo/Desktop/GAProject1/Background.svg");
+    background-image: url("Images/Background.svg");
     background-size: cover;
     background-origin: inherit;
     background-position: center center; 
@@ -63,8 +65,8 @@ button {
 
  .obstacle {
   POSITION: absolute;   
-  width: 60px; 
-  height: 60px;
-  background-color: orange; 
+  width: 100px; 
+  height: 100px;
+  /* background-color: orange;  */
   bottom: 150px; 
  }

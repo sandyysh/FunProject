@@ -65,9 +65,11 @@ let timerID;
       } 
     }, 20);
   }
-  //array random image
+
+
+
+
   //  function generateObstacles() creates new  obstacles and append it to the grid element in the html 
-//the position is 100 pixels from the left of the grid. 
   
 function detectCollision(walkingBall, obstacle){
   const walkingBallBounding = walkingBall.getBoundingClientRect();
@@ -81,13 +83,27 @@ function detectCollision(walkingBall, obstacle){
 }
 
 function generateObstacles() {
-    let obstaclePosition = $(window).width() -60; // set initial obstacle position
+  //Array of obstacle images
+  const obstacleImages = [
+    "Images/Obstacle1.svg",
+    "Images/Obstacle2.svg", 
+    "Images/Obstacle3.svg",
+    "Images/Obstacle4.svg", 
+    "Images/Obstacle5.svg",
+    "Images/Obstacle6.svg"
+  ];
+  let obstaclePosition = $(window).width() -100; // set initial obstacle position
    // while(obstaclePosition >= -100){
   //using a while loop to generate multiple obstacles when certain conditions are met
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
+    // Generate a random number between 0 and the length of the image array minus one. For example:
+    const randomIndex = Math.floor(Math.random() * obstacleImages.length);  
+    obstacle.style.backgroundImage = `url(${obstacleImages[randomIndex]})`;
     grid.appendChild(obstacle)
     obstacle.style.left = obstaclePosition + 'px';
+    obstacle.style.backgroundSize = 'contain';
+    
     //this moves to left by -10 per 2 secs making it seem like a motion 
     let timerID = setInterval(function() {
       obstaclePosition -= 20;
@@ -107,11 +123,11 @@ function generateObstacles() {
           $("button").text("Game over").css({opacity: 0.5});
             setTimeout(function() {
               $("button").text("Press any key to restart").css({opacity: 1}) 
-              }, 2000); //add delay of 5 second before changing button
+              }, 2000); //add delay of 2 second before changing button
             document.addEventListener("keydown", function(){
               setTimeout(function(){
               reloadGame();
-          }, 20);
+          }, 50);
         });
         }
       }     
@@ -123,9 +139,7 @@ function generateObstacles() {
 }
 
 function startGame(){
-  
   setTimeout(generateObstacles, 5000);
- 
 }
 
 //the setInterval method repeatedly calls a function, function() with a delay of 20 miliseconds between each call 
@@ -139,10 +153,8 @@ function startGame(){
 
   //To reduce the padding around the ball
 
-
 function reloadGame(){
   location.reload()  //if any key is pressed
 }
-
   startGame();
 });
