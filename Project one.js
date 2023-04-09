@@ -8,11 +8,11 @@
 $(() => {
 //Select the walkingBall, button and grid element
 //Query selector lets u choose the first html element
-const walkingBall = document.querySelector('.walkingBall'); 
-  const jumpButton = document.querySelector('button');
-  const grid = document.querySelector('.grid')
-  let obstacleIntervalID;
-  let timerID;
+const walkingBall = document.querySelector('.walkingBall')
+const jumpButton = document.querySelector('button');
+const grid = document.querySelector('.grid')
+let obstacleIntervalID;
+let timerID;
 
 //defines the function 'control' that listens for the spacebar key press and triggers the jump function when the spacebar is pressed
   function control(e) {
@@ -35,7 +35,7 @@ const walkingBall = document.querySelector('.walkingBall');
   //If the ball is already jumping, don't do anything.
     if (isJumping) return; 
     isJumping = true;
-    let position = 400;
+    let position = 150
     let timerId = setInterval(function() {
       //move the ball upwards by changing its bottom position
       //this looks like jump but i didnt add jump anywhere?
@@ -52,14 +52,14 @@ const walkingBall = document.querySelector('.walkingBall');
 
   //This function moves the ball downwards when its falling
   function fall() {
-    let position = 1000;
+    let position = 900;
     let timerId = setInterval(function() {
       //move the ball downwards by changing its bottom position 
       position -= 50;
       walkingBall.style.bottom = position + 'px';
 
     // If the ball reaches the ground, stop moving it and reset isJumping variable
-      if (position <= 400) {
+      if (position <= 150) {
         clearInterval(timerId);
         isJumping = false; //reset isJumping to false
       } 
@@ -81,7 +81,7 @@ function detectCollision(walkingBall, obstacle){
 }
 
 function generateObstacles() {
-    let obstaclePosition = window.innerWidth + 200; // set initial obstacle position
+    let obstaclePosition = $(window).width() -60; // set initial obstacle position
    // while(obstaclePosition >= -100){
   //using a while loop to generate multiple obstacles when certain conditions are met
     const obstacle = document.createElement('div');
@@ -107,7 +107,7 @@ function generateObstacles() {
           $("button").text("Game over").css({opacity: 0.5});
             setTimeout(function() {
               $("button").text("Press any key to restart").css({opacity: 1}) 
-              }, 5000); //add delay of 5 second before changing button
+              }, 2000); //add delay of 5 second before changing button
             document.addEventListener("keydown", function(){
               setTimeout(function(){
               reloadGame();
@@ -115,7 +115,8 @@ function generateObstacles() {
         });
         }
       }     
-    } ,20); 
+    }
+    ,20); 
 
 
  // }
