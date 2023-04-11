@@ -13,7 +13,10 @@ const jumpButton = document.querySelector('button');
 const grid = document.querySelector('.grid')
 let obstacleIntervalID;
 let timerID;
+let windowWidth = $(window).width();
+console.log($("#score-container").width());
 
+$("#score-container").css({left: ((windowWidth/2) - 0) + "px" })
 //defines the function 'control' that listens for the spacebar key press and triggers the jump function when the spacebar is pressed
   function control(e) {
     if (e.keyCode === 32) {
@@ -82,7 +85,7 @@ function detectCollision(walkingBall, obstacle){
 //Function to increment score and display
 function obstacleAvoided() {
   score++;
-  $("#score").text("Score:" + score);
+  $("#score-count").text( score);
 }
 
 function generateObstacles() {

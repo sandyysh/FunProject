@@ -71,7 +71,32 @@ button {
   bottom: 150px; 
  }
 
- #score {
-  font-size: 32px; 
-  position: absolute; 
- }
+ #score-container {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+#score-count {
+  font-size: 64px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff; 
+  font-size: 61px;
+    position: relative;
+    left: 210px;
+    top: 63px;
+}
+
+#score-background {
+  background-image: url("Images/Score.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+  top: 10%;
+  left: 50%;
+  z-index: 1;
+  width: 280px;
+  height: 136/2px;
+}
