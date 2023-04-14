@@ -12,6 +12,19 @@ const walkingBall = document.querySelector('.walkingBall')
 const jumpButton = document.querySelector('button');
 const grid = document.querySelector('.grid')
 const overlay = document.querySelector('.overlay')
+  const overlayShownCookie = 'overlayShown'
+  
+  // check if the overlay shown cookie exists
+  const overlayShown = document.cookie.split(';').some((item) => item.trim().startsWith(`${overlayShownCookie}=`))
+  
+  if (!overlayShown) {
+    // show overlay
+    overlay.style.display = 'block'
+    
+    // set cookie to indicate the overlay has been shown
+    document.cookie = `${overlayShownCookie}=true; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+  }
+
 let obstacleIntervalID;
 let timerID;
 let windowWidth = $(window).width();
