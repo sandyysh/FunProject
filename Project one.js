@@ -11,16 +11,25 @@ $(() => {
 const walkingBall = document.querySelector('.walkingBall')
 const jumpButton = document.querySelector('button');
 const grid = document.querySelector('.grid')
+const overlay = document.querySelector('.overlay')
 let obstacleIntervalID;
 let timerID;
 let windowWidth = $(window).width();
 console.log($("#score-container").width());
 
 $("#score-container").css({left: ((windowWidth/2) - 0) + "px" })
+
+$(document).ready(function() {
+  $("#start-button").click(function() {
+  });
+});
+
+
 //defines the function 'control' that listens for the spacebar key press and triggers the jump function when the spacebar is pressed
   function control(e) {
     if (e.keyCode === 32) {
       jump();
+      $(".overlay").hide();
     }
   }
   //Event listeners are added to the jump button and the document for keyboard input
@@ -131,15 +140,18 @@ function generateObstacles() {
         clearInterval(timerID);
         clearInterval(obstacleIntervalID);
         $("button").text("Game over").css({opacity: 0.5});
+        //change background if you want
+        isJumping = true;
         setTimeout(function() {
           $("button").text("Press any key to restart").css({opacity: 1}) 
-        }, 2000); //add delay of 2 second before changing button
-              
-        document.addEventListener("keydown", function(){
-          setTimeout(function(){
-            reloadGame();
+          document.addEventListener("keydown", function(){
+            setTimeout(function(){
+              reloadGame();
+            });
           });
-        });
+        }, 1000); //add delay of 2 second before changing button
+              
+              
       } /* else if (obstaclePosition < 0 && obstaclePosition > -10 ) {
             obstacleAvoided();
             console.log(score)
