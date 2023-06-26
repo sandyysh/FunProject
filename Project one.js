@@ -6,7 +6,7 @@
 // }
 
 $(() => {
-//Select the walkingBall, button and grid element
+//Select the walkingBall, button, grid element and overlay.
 const walkingBall = document.querySelector('.walkingBall')
 const jumpButton = document.querySelector('button');
 const grid = document.querySelector('.grid')
@@ -147,12 +147,12 @@ function generateObstacles() {
       obstacle.remove();
       randomTime = Math.floor(Math.random() * 5000) + 1000;
       setTimeout(generateObstacles,randomTime);
-    }else{ //if (obstaclePosition > 0 && obstaclePosition <60) {
+      }
+      else{ //if (obstaclePosition > 0 && obstaclePosition <60) {
       if (detectCollision(walkingBall, obstacle)) {          
         clearInterval(timerID);
         clearInterval(obstacleIntervalID);
         $("button").text("Game over").css({opacity: 0.5});
-        //change background if you want
         isJumping = true;
         setTimeout(function() {
           $("button").text("Press any key to restart").css({opacity: 1}) 
@@ -161,7 +161,7 @@ function generateObstacles() {
               reloadGame();
             });
           });
-        }, 1000); //add delay of 2 second before changing button
+        }, 2000); //add delay of 2 second before changing button
               
               
       } 
